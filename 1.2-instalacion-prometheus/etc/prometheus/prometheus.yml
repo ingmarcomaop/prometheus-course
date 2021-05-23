@@ -12,11 +12,9 @@ scrape_configs:
     scrape_interval: 5s
     static_configs:
       - targets: ['app:8081']
-<<<<<<< HEAD
-=======
 
   - job_name: 'codelyphp'
     scrape_interval: 5s
     static_configs:
       - targets: ['phpapp:8082']
->>>>>>> 04ec09d41f06661e1915812117ddb49813a96596
+
