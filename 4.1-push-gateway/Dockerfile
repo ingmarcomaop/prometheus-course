@@ -9,4 +9,4 @@ RUN apk --no-cache add ca-certificates
 COPY --from=builder /main ./
 RUN chmod +x ./main
 ENTRYPOINT ["./main"]
-EXPOSE 80
+EXPOSE 8081

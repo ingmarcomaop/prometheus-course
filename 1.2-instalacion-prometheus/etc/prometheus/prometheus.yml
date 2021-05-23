@@ -13,8 +13,8 @@ scrape_configs:
     static_configs:
       - targets: ['app:8081']
 
-  - job_name: 'codelyphp'
-    scrape_interval: 5s
+  - job_name: 'pushgateway'
+    scrape_interval: 10s
+    honor_labels: true
     static_configs:
-      - targets: ['phpapp:8082']
-
+      - targets: ['pushgateway:8082']

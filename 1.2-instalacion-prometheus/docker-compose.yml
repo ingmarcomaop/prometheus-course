@@ -16,17 +16,16 @@ services:
       - 9090:9090
 
   app:
-    build: /home/adminuser/prometheusCodely/prometheus-course/3.1-app-exporter-go
+    image: goappexporter:latest
     restart: always
     ports:
       - 8081:8081
     depends_on:
       - prometheus
 
-  phpapp:
-    image: phpapp:latest
+  pushgateway:
+    image: prom/pushgateway
     ports:
-      - 8082:8082
+      - 8082:9091
     depends_on:
       - prometheus
-
