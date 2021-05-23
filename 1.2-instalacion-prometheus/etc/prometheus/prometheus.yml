@@ -8,13 +8,17 @@ scrape_configs:
           env: local
           region: us-east-1
 
-  - job_name: 'codely'
+  - job_name: 'cadvisor'
     scrape_interval: 5s
     static_configs:
-      - targets: ['app:8081']
+      - targets: ['cadvisor:8081']
 
   - job_name: 'cadvisor'
     scrape_interval: 5s
     static_configs:
       - targets: ['cadvisor:8082']
 
+  - job_name: 'mysqld_exporter'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['mysqld_exporter:8083']

@@ -15,14 +15,6 @@ services:
     ports:
       - 9090:9090
 
-  app:
-    build: /home/adminuser/prometheusCodely/prometheus-course/3.1-app-exporter-go
-    restart: always
-    ports:
-      - 8081:8081
-    depends_on:
-      - prometheus
-
   cadvisor:
     image: google/cadvisor
     volumes:
@@ -31,7 +23,39 @@ services:
       - /sys:/sys:ro
       - /var/lib/docker/:/var/lib/docker:ro
     ports:
-      - 8082:8080
+      - 8081:8080
     depends_on:
       - prometheus
 
+  mysql:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '8082:3306'
+    volumes:
+      - './var/mysql:/var/lib/mysql'
+      - './ops/database:/docker-entrypoint-initdb.d'
+      - './var/log/mysql:/var/log/mysql'
+
+  mysqld_exporter:
+    image: prom/mysqld-exporter
+    user: root
+    ports:
+     - '8083:9104'
+    links:
+      - mysql
+    environment:
+      - "DATA_SOURCE_NAME=root:password@(mysql:3306)/db"
+      - "collect.info_schema.tablestats=true"
+      - "collect.info_schema.userstats=true"
+      - "collect.info_schema.query_response_time=true"
+      - "collect.auto_increment.columns=true"
+      - "collect.perf_schema.tableiowaits=true"
+      - "collect.perf_schema.tablelocks=true"
+    depends_on:
+      - mysql
