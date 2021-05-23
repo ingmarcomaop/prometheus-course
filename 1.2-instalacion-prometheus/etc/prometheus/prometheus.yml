@@ -13,8 +13,8 @@ scrape_configs:
     static_configs:
       - targets: ['app:8081']
 
-  - job_name: 'codelyphp'
+  - job_name: 'cadvisor'
     scrape_interval: 5s
     static_configs:
-      - targets: ['phpapp:8082']
+      - targets: ['cadvisor:8082']
 
