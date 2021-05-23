@@ -14,3 +14,10 @@ services:
       - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
       - 9090:9090
+
+  app:
+    build: /home/adminuser/prometheusCodely/prometheus-course/3.4-app-exporter-php
+    ports:
+      - 8081:8081
+    depends_on:
+      - prometheus
