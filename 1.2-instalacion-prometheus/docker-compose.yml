@@ -17,8 +17,21 @@ services:
 
   app:
     build: /home/adminuser/prometheusCodely/prometheus-course/3.1-app-exporter-go
+<<<<<<< HEAD
     restart: always
+=======
+>>>>>>> 04ec09d41f06661e1915812117ddb49813a96596
     ports:
       - 8081:8081
     depends_on:
       - prometheus
+<<<<<<< HEAD
+=======
+
+  phpapp:
+    image: phpapp:latest
+    ports:
+      - 8082:8082
+    depends_on:
+      - prometheus
+>>>>>>> 04ec09d41f06661e1915812117ddb49813a96596
